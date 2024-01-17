@@ -1,0 +1,2 @@
+import"./assets/modulepreload-polyfill-ec808ebb.js";import{f as n}from"./assets/vendor-e6f7761b.js";document.querySelector("#datetime-picker");const t=document.querySelector("button");let i;t.addEventListener("click",r);const a={enableTime:!0,time_24hr:!0,defaultDate:new Date,minuteIncrement:1,onClose(o){if(console.log(o[0]),i=o.forEach(e=>e),i<=this.defaultDate){t.disabled=!0;const e=e.show({message:"Please choose a date in the future"})}else t.disabled=!1}};n("#datetime-picker",{options:a});function r(){}
+//# sourceMappingURL=commonHelpers.js.map
