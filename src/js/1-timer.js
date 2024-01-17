@@ -18,7 +18,7 @@ const options = {
   onClose(selectedDates) {
     console.log(selectedDates[0]);
     userSelectedDate = selectedDates.forEach(date => date);
-    if (userSelectedDate <= this.defaultDate) {
+    if (userSelectedDate < this.defaultDate) {
       btn.disabled = true;
       const iziToast = iziToast.show({
         message: 'Please choose a date in the future',
