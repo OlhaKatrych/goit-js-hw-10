@@ -21,8 +21,9 @@ const options = {
       console.log(element);
       if (options.defaultDate > element) {
         btn.disabled = true;
-        const iziToast = iziToast.show({
+        izitoast.error({
           message: 'Please choose a date in the future',
+          position: 'topRight',
         });
       } else {
         btn.disabled = false;
