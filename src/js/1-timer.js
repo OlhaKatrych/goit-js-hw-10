@@ -37,19 +37,22 @@ const options = {
 
 const libFlatPickr = flatpickr('#datetime-picker', options);
 
-function startTimer() {
-  const arr = [...container.children];
-  let timerElement;
-  for (let item of arr) {
-    timerElement = item.firstElementChild;
-  }
-  const diff = userSelectedDate - options.defaultDate;
-  timerElement.textContent = convertMs(diff);
+const arr = [...container.children];
+let element;
+for (let item of arr) {
+  element = item;
 }
+const schedule = {
+  days: Number(element.children[0].textContent),
+  hours: Number(element.children[0].textContent),
+  minutes: Number(element.children[0].textContent),
+  seconds: Number(element.children[0].textContent),
+};
 
+const diff = userSelectedDate - options.defaultDate;
 function handlerClicker(e) {
   e.target.disabled = true;
-  startTimer();
+  convertMs(diff);
 }
 
 function convertMs(ms) {
@@ -69,8 +72,9 @@ function convertMs(ms) {
   const seconds = Math.floor((((ms % day) % hour) % minute) / second);
 
   return { days, hours, minutes, seconds };
+
 }
 
-// console.log(convertMs(2000)); // {days: 0, hours: 0, minutes: 0, seconds: 2}
-// console.log(convertMs(140000)); // {days: 0, hours: 0, minutes: 2, seconds: 20}
-// console.log(convertMs(24140000)); // {days: 0, hours: 6 minutes: 42, seconds: 20}
+//console.log(convertMs(2000)); // {days: 0, hours: 0, minutes: 0, seconds: 2}
+//console.log(convertMs(140000)); // {days: 0, hours: 0, minutes: 2, seconds: 20}
+//console.log(convertMs(24140000)); // {days: 0, hours: 6 minutes: 42, seconds: 20}
