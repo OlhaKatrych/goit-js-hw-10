@@ -31,6 +31,7 @@ const options = {
         });
       } else {
         btn.disabled = false;
+        console.log(element);
       }
       userSelectedDate = element;
     });
@@ -46,14 +47,13 @@ function handlerClicker(e) {
       const currentTime = Date.now();
       let diff = userSelectedDate - currentTime;
       const objConvert = convertMs(diff);
-      days.innerHTML = objConvert.days;
-      hours.innerHTML = objConvert.hours;
-      minutes.innerHTML = objConvert.minutes;
-      seconds.innerHTML = objConvert.seconds;
+      days.innerHTML = addLeadingZero(objConvert.days);
+      hours.innerHTML = addLeadingZero(objConvert.hours);
+      minutes.innerHTML = addLeadingZero(objConvert.minutes);
+      seconds.innerHTML = addLeadingZero(objConvert.seconds);
       if (diff < 1000) {
         clearInterval(timerID);
       }
-      addLeadingZero(objConvert.days);
     }, 1000);
   }
 }
