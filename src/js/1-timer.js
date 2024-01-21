@@ -32,22 +32,34 @@ const options = {
       } else {
         btn.disabled = false;
       }
-      userSelectedDate.push(element);
+      userSelectedDate = element;
     });
   },
 };
 
 const libFlatPickr = flatpickr('#datetime-picker', options);
-const diff = userSelectedDate - options.defaultDate;
 
 function handlerClicker(e) {
   e.target.disabled = true;
-  const objConvert = convertMs(diff);
+  if (options.enableTime) {
+    const timerID = setInterval(() => {
+      const currentTime = Date.now();
+      let diff = userSelectedDate - currentTime;
+      const objConvert = convertMs(diff);
+      days.innerHTML = objConvert.days;
+      hours.innerHTML = objConvert.hours;
+      minutes.innerHTML = objConvert.minutes;
+      seconds.innerHTML = objConvert.seconds;
+      if (diff < 1000) {
+        clearInterval(timerID);
+      }
+      addLeadingZero(objConvert.days);
+    }, 1000);
+  }
+}
 
-  days.innerHTML = objConvert.days;
-  hours.innerHTML = objConvert.hours;
-  minutes.innerHTML = objConvert.minutes;
-  seconds.innerHTML = objConvert.seconds;
+function addLeadingZero(value) {
+  return String(value).padStart(2, '0');
 }
 
 function convertMs(ms) {
