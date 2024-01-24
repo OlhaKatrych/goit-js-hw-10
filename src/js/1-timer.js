@@ -4,16 +4,16 @@ import 'flatpickr/dist/flatpickr.min.css';
 import izitoast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 
-const btn = document.querySelector('button');
+const startButton = document.querySelector('button');
 const days = document.querySelector('[data-days]');
 const hours = document.querySelector('[data-hours]');
 const minutes = document.querySelector('[data-minutes]');
-const seconds = document.querySelector('[data-seconds');
+const seconds = document.querySelector('[data-seconds]');
 
 let userSelectedDate;
-btn.disabled = true;
+startButton.disabled = true;
 
-btn.addEventListener('click', handlerClicker);
+startButton.addEventListener('click', handlerClicker);
 
 const options = {
   enableTime: true,
@@ -22,17 +22,19 @@ const options = {
   minuteIncrement: 1,
   onClose(selectedDates) {
     console.log(selectedDates[0]);
-    selectedDates.forEach(element => {
-      if (options.defaultDate > element) {
-        izitoast.error({
-          message: 'Please choose a date in the future',
-          position: 'topRight',
-        });
-      } else {
-        btn.disabled = false;
-      }
-      userSelectedDate = element;
-    });
+
+    userSelectedDate = selectedDates[0];
+
+    if (options.defaultDate > userSelectedDate) {
+      izitoast.error({
+        message: 'Please choose a date in the future',
+        position: 'topRight',
+      });
+
+      startButton.disabled = true;
+    } else {
+      startButton.disabled = false;
+    }
   },
 };
 
