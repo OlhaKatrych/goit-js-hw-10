@@ -7,14 +7,14 @@ form.addEventListener('submit', handlerSubmit);
 function handlerSubmit(e) {
   e.preventDefault();
   const state = form.elements.state.value;
-  let delay = form.elements.delay.value;
+  let delay = parseInt(form.elements.delay.value, 10);
 
   const promise = new Promise((resolve, reject) => {
     const timerID = setTimeout(() => {
       if (state === 'fulfilled') {
-        resolve();
+        resolve(delay);
       } else if (state === 'rejected') {
-        reject();
+        reject(delay);
       }
     }, delay);
   });
