@@ -5,6 +5,7 @@ import izitoast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 
 const startButton = document.querySelector('button');
+const input = document.querySelector('#datetime-picker');
 const days = document.querySelector('[data-days]');
 const hours = document.querySelector('[data-hours]');
 const minutes = document.querySelector('[data-minutes]');
@@ -13,7 +14,7 @@ const seconds = document.querySelector('[data-seconds]');
 let userSelectedDate;
 startButton.disabled = true;
 
-startButton.addEventListener('click', handlerClicker);
+startButton.addEventListener('click', startTimer);
 
 const options = {
   enableTime: true,
@@ -24,7 +25,6 @@ const options = {
     console.log(selectedDates[0]);
 
     userSelectedDate = selectedDates[0];
-
     if (options.defaultDate > userSelectedDate) {
       izitoast.error({
         message: 'Please choose a date in the future',
@@ -40,8 +40,9 @@ const options = {
 
 const libFlatPickr = flatpickr('#datetime-picker', options);
 
-function handlerClicker(e) {
+function startTimer(e) {
   e.target.disabled = true;
+  input.disabled = true;
   if (options.enableTime) {
     const timerID = setInterval(() => {
       const currentTime = Date.now();
